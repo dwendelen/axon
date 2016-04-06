@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.axonframework:axon-core:2.4.4')
+
+    testCompile('org.axonframework:axon-test:2.4.4')
+    testCompile('junit:junit:4.12')
+}
