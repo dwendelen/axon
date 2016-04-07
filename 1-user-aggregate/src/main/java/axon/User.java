@@ -6,6 +6,7 @@ import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
+import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
 
 import java.util.UUID;
 
@@ -13,34 +14,20 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     @AggregateIdentifier
     private UUID uuid;
 
-    private String name;
-
     public User() {}
 
     @CommandHandler
     public User(CreateUserCommand createUserCommand) {
-        String name = createUserCommand.name;
-        UUID uuid = createUserCommand.uuid;
+        UUID uuid = createUserCommand.getUuid();
+        String name = createUserCommand.getName();
 
-        if(name == null || uuid == null) {
-            throw new IllegalArgumentException();
-        }
-
-        UserCreatedEvent userCreatedEvent = new UserCreatedEvent();
-        userCreatedEvent.name = name;
-        userCreatedEvent.uuid = uuid;
-
+        UserCreatedEvent userCreatedEvent = new UserCreatedEvent(uuid, name);
         apply(userCreatedEvent);
     }
 
-    @EventHandler
+    @EventSourcingHandler
     public void handleCreated(UserCreatedEvent userCreatedEvent) {
-        this.name = userCreatedEvent.name;
-        this.uuid = userCreatedEvent.uuid;
-    }
-
-    public String getName() {
-        return name;
+        this.uuid = userCreatedEvent.getUuid();
     }
 
     public UUID getUuid() {
