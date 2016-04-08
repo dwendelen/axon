@@ -11,5 +11,6 @@ allprojects {
 
         testCompile('org.axonframework:axon-test:2.4.4')
         testCompile('junit:junit:4.12')
+        testCompile('org.assertj:assertj-core:3.4.0')
     }
 }

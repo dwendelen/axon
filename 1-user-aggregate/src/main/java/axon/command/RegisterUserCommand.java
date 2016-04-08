@@ -1,13 +1,13 @@
-package axon.event;
+package axon.command;
 
 import java.util.UUID;
 
-public class UserCreatedEvent {
-    private UUID uuid;
+public class RegisterUserCommand {
+    private UUID uuid = UUID.randomUUID();
+
     private String name;
 
-    public UserCreatedEvent(UUID uuid, String name) {
-        this.uuid = uuid;
+    public RegisterUserCommand(String name) {
         this.name = name;
     }
 

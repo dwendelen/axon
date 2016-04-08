@@ -1,7 +1,7 @@
 package axon;
 
-import axon.command.CreateUserCommand;
-import axon.event.UserCreatedEvent;
+import axon.command.RegisterUserCommand;
+import axon.event.UserRegisteredEvent;
 import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.Before;
@@ -18,37 +18,37 @@ public class UserTest {
     }
 
     @Test
-    public void whenICreateAUser_thenAUserIsCreated() throws Exception {
-        CreateUserCommand createUserCommand = new CreateUserCommand(NAME);
+    public void whenIRegisterAUser_thenAUserIsRegistered() throws Exception {
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME);
 
-        UserCreatedEvent userCreatedEvent = new UserCreatedEvent(createUserCommand.getUuid(), NAME);
+        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(registerUserCommand.getUuid(), NAME);
 
         fixture.given()
-                .when(createUserCommand)
-                .expectEvents(userCreatedEvent);
+                .when(registerUserCommand)
+                .expectEvents(userRegisteredEvent);
     }
 
     @Test
-    public void whenICreateAUserWithoutName_thenAnExceptionIsThrown() throws Exception {
-        CreateUserCommand createUserCommand = new CreateUserCommand("");
+    public void whenIRegisterAUserWithoutName_thenAnExceptionIsThrown() throws Exception {
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand("");
 
         fixture.given()
-                .when(createUserCommand)
+                .when(registerUserCommand)
                 .expectException(IllegalArgumentException.class);
     }
 
     @Test
-    public void whenICreateAUserWithoutAnEmailAddress_thenAnExceptionIsThrown() throws Exception {
-        CreateUserCommand createUserCommand = new CreateUserCommand(NAME);
+    public void whenIRegisterAUserWithoutAnEmailAddress_thenAnExceptionIsThrown() throws Exception {
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME);
 
         fixture.given()
-                .when(createUserCommand)
+                .when(registerUserCommand)
                 .expectException(IllegalArgumentException.class);
     }
 
     @Test
     public void givenAUser_whenIUpdateTheEmailAddress_thenTheEmailAddressIsUpdated() throws Exception {
-        fixture.given(new CreateUserCommand(NAME))
+        fixture.given(new RegisterUserCommand(NAME))
                 .when(null) //TODO
                 .expectEvents(); //TODO
     }

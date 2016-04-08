@@ -1,9 +1,8 @@
 package axon;
 
-import axon.command.CreateUserCommand;
-import axon.event.UserCreatedEvent;
+import axon.command.RegisterUserCommand;
+import axon.event.UserRegisteredEvent;
 import org.axonframework.commandhandling.annotation.CommandHandler;
-import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
@@ -17,20 +16,28 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     public User() {}
 
     @CommandHandler
-    public User(CreateUserCommand createUserCommand) {
-        UUID uuid = createUserCommand.getUuid();
-        String name = createUserCommand.getName();
+    public User(RegisterUserCommand registerUserCommand) {
+        UUID uuid = registerUserCommand.getUuid();
+        String name = registerUserCommand.getName();
 
-        UserCreatedEvent userCreatedEvent = new UserCreatedEvent(uuid, name);
-        apply(userCreatedEvent);
+        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(uuid, name);
+        apply(userRegisteredEvent);
     }
 
     @EventSourcingHandler
-    public void handleCreated(UserCreatedEvent userCreatedEvent) {
-        this.uuid = userCreatedEvent.getUuid();
+    public void handleRegistaration(UserRegisteredEvent userRegisteredEvent) {
+        this.uuid = userRegisteredEvent.getUuid();
     }
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public String getName() {
+        throw new UnsupportedOperationException();
+    }
+
+    public String getEmailAddress() {
+        throw new UnsupportedOperationException();
     }
 }
