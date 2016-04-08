@@ -2,6 +2,7 @@ package axon;
 
 import axon.command.RegisterUserCommand;
 import axon.command.UpdateEmailAddressCommand;
+import axon.infrastructure.mail.MailCientMock;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +17,11 @@ public class ApplicationTest {
     public static final String NEW_EMAIL_ADDRESS = "email";
 
     private Application application = new Application();
+    private MailCientMock mailCientMock = new MailCientMock();
 
     @Before
     public void setup() {
+        application.setMailClient(mailCientMock);
         application.init();
     }
 
@@ -49,4 +52,21 @@ public class ApplicationTest {
     }
 
     //2 EVENT LISTENERS
+    @Test
+    public void whenAUserIsRegistered_thenAnEmailIsSent() throws Exception {
+        application.send(new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS));
+
+        mailCientMock.assertLastEmailAddress(OLD_EMAIL_ADDRESS);
+    }
+
+    @Test
+    public void whenTheEmailAddressIsUpdated_thenAnEmailIsSent() throws Exception {
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
+        UUID uuid = registerUserCommand.getUuid();
+
+        application.send(registerUserCommand);
+        application.send(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
+
+        mailCientMock.assertLastEmailAddress(NEW_EMAIL_ADDRESS);
+    }
 }
