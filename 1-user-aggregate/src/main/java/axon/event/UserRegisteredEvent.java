@@ -4,11 +4,9 @@ import java.util.UUID;
 
 public class UserRegisteredEvent {
     private UUID uuid;
-    private String name;
 
-    public UserRegisteredEvent(UUID uuid, String name) {
+    public UserRegisteredEvent(UUID uuid) {
         this.uuid = uuid;
-        this.name = name;
     }
 
     public UUID getUuid() {
@@ -16,6 +14,6 @@ public class UserRegisteredEvent {
     }
 
     public String getName() {
-        return name;
+        throw new UnsupportedOperationException();
     }
 }

@@ -18,9 +18,8 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     @CommandHandler
     public User(RegisterUserCommand registerUserCommand) {
         UUID uuid = registerUserCommand.getUuid();
-        String name = registerUserCommand.getName();
 
-        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(uuid, name);
+        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(uuid);
         apply(userRegisteredEvent);
     }
 
