@@ -3,8 +3,6 @@ package axon.ui;
 import axon.Application;
 import axon.User;
 import axon.command.RegisterUserCommand;
-import axon.hello.HelloCommand;
-import axon.hello.WorldCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.axonframework.unitofwork.DefaultUnitOfWork;
 import org.axonframework.unitofwork.UnitOfWork;
@@ -29,20 +27,14 @@ public class Main {
 
     private void run() {
         application.init();
-        helloWold();
         registerUser();
-    }
-
-    private void helloWold() {
-        application.send(new HelloCommand("Hello "));
-        application.send(new WorldCommand("world!"));
     }
 
     private void registerUser() {
         String name = input("Name");
         String email = input("E-mail");
 
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(name); //TODO
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(name, email);
         output("Creating user with UUID", registerUserCommand.getUuid());
 
         UUID uuid = application.send(registerUserCommand);

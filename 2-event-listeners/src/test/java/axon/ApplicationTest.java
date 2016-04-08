@@ -1,6 +1,7 @@
 package axon;
 
 import axon.command.RegisterUserCommand;
+import axon.command.UpdateEmailAddressCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +25,7 @@ public class ApplicationTest {
     //1 USER AGGREGATE
     @Test
     public void iCanRegisterAUsersWithANameAndAnEmailAddress() throws Exception {
-        RegisterUserCommand command = new RegisterUserCommand(NAME); //TODO
+        RegisterUserCommand command = new RegisterUserCommand(NAME, NEW_EMAIL_ADDRESS);
         UUID uuid = command.getUuid();
 
         application.send(command);
@@ -35,15 +36,17 @@ public class ApplicationTest {
 
     @Test
     public void iCanUpdateTheEmailAddress() throws Exception {
-        RegisterUserCommand command = new RegisterUserCommand(NAME); //TODO
+        RegisterUserCommand command = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
         UUID uuid = command.getUuid();
 
         application.send(command);
         User user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(OLD_EMAIL_ADDRESS);
 
-        application.send(null); //TODO
+        application.send(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
         user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
     }
+
+    //2 EVENT LISTENERS
 }

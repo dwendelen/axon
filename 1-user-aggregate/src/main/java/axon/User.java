@@ -24,7 +24,7 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     }
 
     @EventSourcingHandler
-    public void handleRegistaration(UserRegisteredEvent userRegisteredEvent) {
+    public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
         this.uuid = userRegisteredEvent.getUuid();
     }
 
