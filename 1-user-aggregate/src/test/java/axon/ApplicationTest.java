@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class ApplicationTest {
     public static final String NAME = "Name";
     public static final String OLD_EMAIL_ADDRESS = "old email";
@@ -27,7 +26,7 @@ public class ApplicationTest {
         RegisterUserCommand command = new RegisterUserCommand(NAME); //TODO
         UUID uuid = command.getUuid();
 
-        application.send(command);
+        application.execute(command);
         User user = application.getUser(uuid);
         assertThat(user.getName()).isEqualTo(NAME);
         assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
@@ -38,11 +37,11 @@ public class ApplicationTest {
         RegisterUserCommand command = new RegisterUserCommand(NAME); //TODO
         UUID uuid = command.getUuid();
 
-        application.send(command);
+        application.execute(command);
         User user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(OLD_EMAIL_ADDRESS);
 
-        application.send(null); //TODO
+        application.execute(null); //TODO
         user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
     }

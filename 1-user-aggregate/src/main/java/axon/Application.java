@@ -16,7 +16,6 @@ import org.axonframework.eventstore.EventStore;
 import org.axonframework.eventstore.fs.FileSystemEventStore;
 import org.axonframework.eventstore.fs.SimpleEventFileResolver;
 import org.axonframework.repository.Repository;
-import org.axonframework.unitofwork.CurrentUnitOfWork;
 import org.axonframework.unitofwork.DefaultUnitOfWork;
 import org.axonframework.unitofwork.UnitOfWork;
 
@@ -49,7 +48,7 @@ public class Application {
         this.userRepository = eventSourcedUserRepository;
     }
 
-    public <T> T send(Object command) {
+    public <T> T execute(Object command) {
         return commandGateway.sendAndWait(command);
     }
 

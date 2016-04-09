@@ -13,19 +13,12 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     @AggregateIdentifier
     private UUID uuid;
 
-    public User() {}
-
     @CommandHandler
     public User(RegisterUserCommand registerUserCommand) {
         UUID uuid = registerUserCommand.getUuid();
 
         UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(uuid);
         apply(userRegisteredEvent);
-    }
-
-    @EventSourcingHandler
-    public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
-        this.uuid = userRegisteredEvent.getUuid();
     }
 
     public UUID getUuid() {
@@ -38,5 +31,10 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
 
     public String getEmailAddress() {
         throw new UnsupportedOperationException();
+    }
+
+    @EventSourcingHandler
+    public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
+        this.uuid = userRegisteredEvent.getUuid();
     }
 }

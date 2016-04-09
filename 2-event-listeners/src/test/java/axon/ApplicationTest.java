@@ -10,7 +10,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class ApplicationTest {
     public static final String NAME = "Name";
     public static final String OLD_EMAIL_ADDRESS = "old email";
@@ -31,7 +30,7 @@ public class ApplicationTest {
         RegisterUserCommand command = new RegisterUserCommand(NAME, NEW_EMAIL_ADDRESS);
         UUID uuid = command.getUuid();
 
-        application.send(command);
+        application.execute(command);
         User user = application.getUser(uuid);
         assertThat(user.getName()).isEqualTo(NAME);
         assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
@@ -42,11 +41,11 @@ public class ApplicationTest {
         RegisterUserCommand command = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
         UUID uuid = command.getUuid();
 
-        application.send(command);
+        application.execute(command);
         User user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(OLD_EMAIL_ADDRESS);
 
-        application.send(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
+        application.execute(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
         user = application.getUser(uuid);
         assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
     }
@@ -54,7 +53,7 @@ public class ApplicationTest {
     //2 EVENT LISTENERS
     @Test
     public void whenAUserIsRegistered_thenAnEmailIsSent() throws Exception {
-        application.send(new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS));
+        application.execute(new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS));
 
         mailCientMock.assertLastEmailAddress(OLD_EMAIL_ADDRESS);
     }
@@ -64,8 +63,8 @@ public class ApplicationTest {
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
         UUID uuid = registerUserCommand.getUuid();
 
-        application.send(registerUserCommand);
-        application.send(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
+        application.execute(registerUserCommand);
+        application.execute(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));
 
         mailCientMock.assertLastEmailAddress(NEW_EMAIL_ADDRESS);
     }

@@ -33,6 +33,11 @@ public class Application {
     public void init() {
         CommandBus commandBus = new SimpleCommandBus();
 
+        this.commandGateway = new DefaultCommandGateway(commandBus);
+
+
+
+
         EventBus eventBus = new SimpleEventBus();
 
         EventStore eventStore = new FileSystemEventStore(new SimpleEventFileResolver(new File("events")));
@@ -41,13 +46,15 @@ public class Application {
 
         AggregateAnnotationCommandHandler.subscribe(User.class, eventSourcedUserRepository, commandBus);
 
-        this.commandGateway = new DefaultCommandGateway(commandBus);
         this.userRepository = eventSourcedUserRepository;
-
 
         AnnotationEventListenerAdapter.subscribe(new LoggingEventListener(), eventBus);
         //TODO Create a new listener and register the listener
         //TODO    The listener needs to depend on this.mailClient
+    }
+
+    public <T> T execute(Object command) {
+        return commandGateway.sendAndWait(command);
     }
 
     /**
@@ -55,10 +62,6 @@ public class Application {
      */
     public void setMailClient(MailClient mailClient) {
         this.mailClient = mailClient;
-    }
-
-    public <T> T send(Object command) {
-        return commandGateway.sendAndWait(command);
     }
 
     public User getUser(UUID uuid) {

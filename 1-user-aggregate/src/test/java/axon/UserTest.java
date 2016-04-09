@@ -20,6 +20,7 @@ public class UserTest {
         fixture = Fixtures.newGivenWhenThenFixture(User.class);
     }
 
+    //1 USER AGGREGATE
     @Test
     public void whenIRegisterAUser_thenAUserIsRegistered() throws Exception {
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME); //TODO

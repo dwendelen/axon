@@ -24,6 +24,7 @@ public class UserTest {
         fixture = Fixtures.newGivenWhenThenFixture(User.class);
     }
 
+    //1 USER AGGREGATE
     @Test
     public void whenIRegisterAUser_thenAUserIsRegistered() throws Exception {
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, NEW_EMAIL);
@@ -66,4 +67,6 @@ public class UserTest {
                 .when(new UpdateEmailAddressCommand(USER_UUID, ""))
                 .expectException(IllegalArgumentException.class);
     }
+
+    //2 EVENT LISTENERS
 }

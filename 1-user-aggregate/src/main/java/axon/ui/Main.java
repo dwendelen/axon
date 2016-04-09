@@ -6,8 +6,6 @@ import axon.command.RegisterUserCommand;
 import axon.hello.HelloCommand;
 import axon.hello.WorldCommand;
 import org.apache.commons.lang3.StringUtils;
-import org.axonframework.unitofwork.DefaultUnitOfWork;
-import org.axonframework.unitofwork.UnitOfWork;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -34,8 +32,8 @@ public class Main {
     }
 
     private void helloWold() {
-        application.send(new HelloCommand("Hello "));
-        application.send(new WorldCommand("world!"));
+        application.execute(new HelloCommand("Hello "));
+        application.execute(new WorldCommand("world!"));
     }
 
     private void registerUser() {
@@ -45,7 +43,7 @@ public class Main {
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(name); //TODO
         output("Creating user with UUID", registerUserCommand.getUuid());
 
-        UUID uuid = application.send(registerUserCommand);
+        UUID uuid = application.execute(registerUserCommand);
         output("Command returned", uuid);
 
         User user = application.getUser(uuid);

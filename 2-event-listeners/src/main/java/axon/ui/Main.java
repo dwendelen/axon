@@ -25,19 +25,19 @@ public class Main {
 
     private void run() {
         application.init();
-        registerUserAndChangeEmail();
+        registerUserAndUpdateEmailAddress();
     }
 
-    private void registerUserAndChangeEmail() {
+    private void registerUserAndUpdateEmailAddress() {
         String name = input("Name");
         String email = input("E-mail");
 
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(name, email);
         UUID uuid = registerUserCommand.getUuid();
-        application.send(registerUserCommand);
+        application.execute(registerUserCommand);
 
         String newEmail = input("New e-mail");
-        application.send(new UpdateEmailAddressCommand(uuid, newEmail));
+        application.execute(new UpdateEmailAddressCommand(uuid, newEmail));
     }
 
     private String input(String prompt) {

@@ -15,6 +15,7 @@ Tips:
 
 When a user registers, a mail is sent to the new users email address.
 There also needs to be send a mail when the email address is changed.
+It is allowed to use the same message for both cases.
 
 Create a new listener that calls the mail client in Application.
 Also try to create a unit test for the listener.
