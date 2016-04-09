@@ -1,8 +1,8 @@
 package axon.ui.commands;
 
-import axon.Application;
-import axon.infrastructure.mail.VirtualMailServer;
-import axon.infrastructure.mail.virtual.Mail;
+import axon.core.Application;
+import axon.core.infrastructure.mail.VirtualMailServer;
+import axon.core.infrastructure.mail.virtual.Mail;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.core.CommandMarker;

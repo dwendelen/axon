@@ -6,7 +6,6 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan
-            base-package="axon.ui" />
-    <bean class="axon.Application" init-method="init" />
+    <context:component-scan base-package="axon.ui" />
+    <bean class="axon.core.Application" init-method="init" />
 </beans>

@@ -1,8 +1,8 @@
 package axon.ui;
 
-import axon.Application;
-import axon.command.RegisterUserCommand;
-import axon.command.UpdateEmailAddressCommand;
+import axon.core.Application;
+import axon.core.command.RegisterUserCommand;
+import axon.core.command.UpdateEmailAddressCommand;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;

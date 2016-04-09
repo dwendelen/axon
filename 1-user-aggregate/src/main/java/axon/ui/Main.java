@@ -1,10 +1,10 @@
 package axon.ui;
 
-import axon.Application;
-import axon.User;
-import axon.command.RegisterUserCommand;
-import axon.hello.HelloCommand;
-import axon.hello.WorldCommand;
+import axon.core.Application;
+import axon.core.User;
+import axon.core.command.RegisterUserCommand;
+import axon.core.hello.HelloCommand;
+import axon.core.hello.WorldCommand;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;

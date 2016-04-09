@@ -1,0 +1,8 @@
+login <name>
+logout
+
+mail list
+mail show <index in the list>
+
+register --name <name> --email <email address>
+update-email <new email address>

@@ -1,7 +1,7 @@
 package axon.ui.user;
 
-import axon.Application;
-import axon.event.UserRegisteredEvent;
+import axon.core.Application;
+import axon.core.event.UserRegisteredEvent;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
