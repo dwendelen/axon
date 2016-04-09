@@ -56,5 +56,9 @@ Convert the core of the application to spring. Create a separate xml for the
 application and include this xml in spring-shell-plugin.xml. Register the
 UI-listeners in spring-shell-plugin.xml and delete Application.registerListener().
 
+Fix all tests. In ApplicationTest the Application and MailCientMock should be
+autowired into the test.
+
 Tips:
  - http://www.axonframework.org/docs/2.4/using-spring.html
+ - Turn MailClientMock into a spring bean. This bean must be the primary bean.
