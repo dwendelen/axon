@@ -31,11 +31,6 @@ public class Application {
 
         eventBus = new SimpleEventBus();
 
-
-
-
-        EventBus eventBus = new SimpleEventBus();
-
         EventStore eventStore = new FileSystemEventStore(new SimpleEventFileResolver(new File("events")));
         EventSourcingRepository<User> eventSourcedUserRepository = new EventSourcingRepository<>(User.class, eventStore);
         eventSourcedUserRepository.setEventBus(eventBus);

@@ -37,4 +37,6 @@ public class MailSendingEventListenerTest {
 
         mailCientMock.assertLastEmailAddress(EMAIL_ADDRESS);
     }
+
+    //4 SPRING
 }

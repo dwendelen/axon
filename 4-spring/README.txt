@@ -46,3 +46,15 @@ All tests should run green at the end of this exercise.
 Tips:
  - Register the listener by Autowiring the Application in the listener and
     register itself it in a @PostConstruct annotated method.
+
+
+4 SPRING
+
+Optional exercise. Functionality remains the same.
+
+Convert the core of the application to spring. Create a separate xml for the
+application and include this xml in spring-shell-plugin.xml. Register the
+UI-listeners in spring-shell-plugin.xml and delete Application.registerListener().
+
+Tips:
+ - http://www.axonframework.org/docs/2.4/using-spring.html

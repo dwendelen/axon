@@ -8,4 +8,6 @@ public class UserDTORepositoryTest {
     public void whenAnUnknownUserIsFetched_thenAnExceptionIsThrown() {
         new UserDTORepository().getUser("Unknown");
     }
+
+    //4 SPRING
 }

@@ -88,4 +88,6 @@ public class UITest {
         assertThat(commandResult.isSuccess());
         assertThat(commandResult.getResult()).isEqualTo("Logged out");
     }
+
+    //4 SPRING
 }

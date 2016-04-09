@@ -80,4 +80,6 @@ public class UserTest {
         assertThat(fields).hasSize(1);
         assertThat(fields[0].getAnnotationsByType(AggregateIdentifier.class)).isNotNull();
     }
+
+    //4 SPRING
 }
