@@ -4,13 +4,11 @@ import axon.command.RegisterUserCommand;
 import axon.event.UserRegisteredEvent;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
-import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
 
 import java.util.UUID;
 
 public class User extends AbstractAnnotatedAggregateRoot<UUID> {
-    @AggregateIdentifier
     private UUID uuid;
 
     @CommandHandler
