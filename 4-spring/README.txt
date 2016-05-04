@@ -39,8 +39,7 @@ part of the domain and is already implemented.
 
 Create the necessary listeners in the UI, and register them with the application.
 These listeners should keep the DTO's in the UI in sync. Classes in the UI to
-change are in the package 'axon.ui.user'. As part of this exercise you must also
-make the User aggregate stateless except for the aggregate identifier.
+change are in the package 'axon.ui.user'.
 All tests should run green at the end of this exercise.
 
 Tips:

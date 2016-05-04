@@ -39,8 +39,7 @@ part of the domain and is already implemented.
 
 Create the necessary listeners in the UI, and register them with the application.
 These listeners should keep the DTO's in the UI in sync. Classes in the UI to
-change are in the package 'axon.ui.user'. As part of this exercise you must also
-make the User aggregate stateless except for the aggregate identifier.
+change are in the package 'axon.ui.user'.
 All tests should run green at the end of this exercise.
 
 Tips:
@@ -62,3 +61,17 @@ autowired into the test.
 Tips:
  - http://www.axonframework.org/docs/2.4/using-spring.html
  - Turn MailClientMock into a spring bean. This bean must be the primary bean.
+
+
+5 SAGAS
+
+When the user updates his/her email address, the email address needs to be
+verified before the email address is really updated.
+
+When the user requests an email address update, then a mail is sent to the new
+email address. The email address is actually updated when the user confirms the
+request.
+
+If the request is not confirmed with X amount of time, then the request is
+cancelled. When a new update request is made while another request is pending,
+then the previous request is cancelled as well.

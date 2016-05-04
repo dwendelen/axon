@@ -74,12 +74,5 @@ public class UserTest {
 
     //2 EVENT LISTENERS
     //3 READ MODELS
-    @Test
-    public void theUserAggregateIsStateless() throws Exception {
-        Field[] fields = User.class.getDeclaredFields();
-        assertThat(fields).hasSize(1);
-        assertThat(fields[0].getAnnotationsByType(AggregateIdentifier.class)).isNotNull();
-    }
-
     //4 SPRING
 }
