@@ -65,13 +65,10 @@ Tips:
 
 5 SAGAS
 
-When the user updates his/her email address, the email address needs to be
-verified before the email address is really updated.
+Now we add games to the system. Users can link a steam account to their account.
+When a user purchases a game, then steam will be notified. If however no steam
+account was linked to the user at the time of the purchase, then steam will be
+notified after an account was linked.
 
-When the user requests an email address update, then a mail is sent to the new
-email address. The email address is actually updated when the user confirms the
-request.
-
-If the request is not confirmed with X amount of time, then the request is
-cancelled. When a new update request is made while another request is pending,
-then the previous request is cancelled as well.
+Complete the implementation of the classes in the packages 'axon.core.game' and
+'axon.ui.game'. Also reconfigure Axon in 'spring-application.xml'.

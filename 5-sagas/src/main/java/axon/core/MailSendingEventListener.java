@@ -1,6 +1,6 @@
 package axon.core;
 
-import axon.core.event.EmailAddressChangedEvent;
+import axon.core.user.event.EmailAddressChangedEvent;
 import axon.core.infrastructure.mail.MailClient;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;

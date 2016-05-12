@@ -1,4 +1,4 @@
-package axon.core.command;
+package axon.core.user.command;
 
 import java.util.UUID;
 

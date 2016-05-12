@@ -1,4 +1,4 @@
-package axon.core.command;
+package axon.core.user.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 

@@ -1,7 +1,7 @@
 package axon.core;
 
-import axon.core.event.EmailAddressUpdatedEvent;
-import axon.core.event.UserRegisteredEvent;
+import axon.core.user.event.EmailAddressUpdatedEvent;
+import axon.core.user.event.UserRegisteredEvent;
 import axon.core.infrastructure.mail.MailCientMock;
 import org.junit.Before;
 import org.junit.Test;

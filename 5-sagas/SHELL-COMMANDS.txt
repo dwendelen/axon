@@ -3,6 +3,9 @@ logout
 
 mail list
 mail show <index in the list>
+steam list
 
 register --name <name> --email <email address>
 update-email <new email address>
+register-game --name <game name> --steamId <id of the game in steam>
+buy-game <game name>

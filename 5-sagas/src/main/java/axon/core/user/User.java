@@ -1,9 +1,9 @@
-package axon.core;
+package axon.core.user;
 
-import axon.core.command.RegisterUserCommand;
-import axon.core.command.UpdateEmailAddressCommand;
-import axon.core.event.EmailAddressUpdatedEvent;
-import axon.core.event.UserRegisteredEvent;
+import axon.core.user.command.RegisterUserCommand;
+import axon.core.user.command.UpdateEmailAddressCommand;
+import axon.core.user.event.EmailAddressUpdatedEvent;
+import axon.core.user.event.UserRegisteredEvent;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.common.Assert;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
