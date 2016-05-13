@@ -1,5 +1,6 @@
-package axon.core;
+package axon.core.user;
 
+import axon.core.MailSendingEventListener;
 import axon.core.user.event.EmailAddressUpdatedEvent;
 import axon.core.user.event.UserRegisteredEvent;
 import axon.core.infrastructure.mail.MailCientMock;

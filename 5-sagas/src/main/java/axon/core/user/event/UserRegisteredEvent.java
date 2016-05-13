@@ -1,14 +1,15 @@
-package axon.core.user.command;
+package axon.core.user.event;
 
 import java.util.UUID;
 
-public class RegisterUserCommand {
-    private UUID userId = UUID.randomUUID();
+public class UserRegisteredEvent implements EmailAddressChangedEvent {
+    private UUID userId;
 
     private String name;
     private String emailAddress;
 
-    public RegisterUserCommand(String name, String emailAddress) {
+    public UserRegisteredEvent(UUID userId, String name, String emailAddress) {
+        this.userId = userId;
         this.name = name;
         this.emailAddress = emailAddress;
     }
@@ -21,6 +22,7 @@ public class RegisterUserCommand {
         return name;
     }
 
+    @Override
     public String getEmailAddress() {
         return emailAddress;
     }

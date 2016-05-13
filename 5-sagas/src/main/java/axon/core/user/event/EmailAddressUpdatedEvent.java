@@ -1,18 +1,18 @@
-package axon.core.event;
+package axon.core.user.event;
 
 import java.util.UUID;
 
 public class EmailAddressUpdatedEvent implements EmailAddressChangedEvent {
-    private UUID uuid;
+    private UUID userId;
     private String newEmailAddress;
 
-    public EmailAddressUpdatedEvent(UUID uuid, String newEmailAddress) {
-        this.uuid = uuid;
+    public EmailAddressUpdatedEvent(UUID userId, String newEmailAddress) {
+        this.userId = userId;
         this.newEmailAddress = newEmailAddress;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getUserId() {
+        return userId;
     }
 
     public String getNewEmailAddress() {

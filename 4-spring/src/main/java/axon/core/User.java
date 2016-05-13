@@ -16,6 +16,9 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     @AggregateIdentifier
     private UUID uuid;
 
+    private String name;
+    private String emailAddress;
+
     public User() {}
 
     @CommandHandler
@@ -36,9 +39,19 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
         return uuid;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
     @EventSourcingHandler
     public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
         this.uuid = userRegisteredEvent.getUuid();
+        this.name = userRegisteredEvent.getName();
+        this.emailAddress = userRegisteredEvent.getEmailAddress();
     }
 
     @CommandHandler
@@ -50,5 +63,10 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
 
         EmailAddressUpdatedEvent emailAddressUpdatedEvent = new EmailAddressUpdatedEvent(uuid, newEmailAddress);
         apply(emailAddressUpdatedEvent);
+    }
+
+    @EventSourcingHandler
+    public void emailAddressUpdated(EmailAddressUpdatedEvent emailAddressUpdatedEvent) {
+        this.emailAddress = emailAddressUpdatedEvent.getNewEmailAddress();
     }
 }

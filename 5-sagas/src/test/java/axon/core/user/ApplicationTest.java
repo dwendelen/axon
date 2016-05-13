@@ -1,7 +1,8 @@
-package axon.core;
+package axon.core.user;
 
-import axon.core.command.RegisterUserCommand;
-import axon.core.command.UpdateEmailAddressCommand;
+import axon.core.Application;
+import axon.core.user.command.RegisterUserCommand;
+import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.infrastructure.mail.MailCientMock;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -63,7 +64,7 @@ public class ApplicationTest {
     @Test
     public void whenTheEmailAddressIsUpdated_thenAnEmailIsSent() throws Exception {
         RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
-        UUID uuid = registerUserCommand.getUuid();
+        UUID uuid = registerUserCommand.getUserId();
 
         application.execute(registerUserCommand);
         application.execute(new UpdateEmailAddressCommand(uuid, NEW_EMAIL_ADDRESS));

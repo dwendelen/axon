@@ -17,11 +17,11 @@
     <axon:filesystem-event-store base-dir="events" id="eventStore"/>
     <axon:event-sourcing-repository
             id="repository"
-            aggregate-type="axon.core.User"
+            aggregate-type="axon.core.user.User"
             event-bus="eventBus"
             event-store="eventStore"/>
     <axon:aggregate-command-handler
-            aggregate-type="axon.core.User"
+            aggregate-type="axon.core.user.User"
             repository="repository"
             command-bus="commandBus"/>
 
@@ -34,5 +34,23 @@
     <bean class="org.axonframework.commandhandling.gateway.DefaultCommandGateway">
         <constructor-arg index="0" ref="commandBus" />
         <constructor-arg index="1"><array/></constructor-arg>
+    </bean>
+
+
+    <bean id="sagaRepository" class="org.axonframework.saga.repository.inmemory.InMemorySagaRepository" />
+    <axon:saga-manager
+            id="sagaManager"
+            saga-repository="sagaRepository">
+        <axon:types>
+            axon.core.ExampleSaga
+        </axon:types>
+    </axon:saga-manager>
+
+    <bean id="executor" class="java.util.concurrent.ScheduledThreadPoolExecutor">
+        <constructor-arg value="0"/>
+    </bean>
+    <bean id="eventScheduler" class="org.axonframework.eventhandling.scheduling.java.SimpleEventScheduler">
+        <constructor-arg ref="executor"/>
+        <constructor-arg ref="eventBus"/>
     </bean>
 </beans>
