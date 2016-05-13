@@ -71,4 +71,5 @@ public class UserTest {
     //2 EVENT LISTENERS
     //3 READ MODELS
     //4 SPRING
+    //5 SAGAS
 }
