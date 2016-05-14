@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
     @Autowired
-    private SteamGateway steamGateway;
+    private transient SteamGateway steamGateway;
 
     public void handle(GameBoughtEvent gameBoughtEvent) {
         throw new UnsupportedOperationException();

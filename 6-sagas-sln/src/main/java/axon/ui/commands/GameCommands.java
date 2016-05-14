@@ -26,7 +26,7 @@ public class GameCommands implements CommandMarker {
             @CliOption(key = {"steamId"}, mandatory = true)
                     String streamId
     ) {
-        application.execute(new RegisterGameCommand(name, streamId));//TODO
+        application.execute(new RegisterGameCommand(name, streamId));
         return "Registered " + name + " with streamId " + streamId;
     }
 

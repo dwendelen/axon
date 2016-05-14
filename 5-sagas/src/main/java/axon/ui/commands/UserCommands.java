@@ -55,6 +55,8 @@ public class UserCommands implements CommandMarker {
         @CliOption(key = "", mandatory = true)
         String steamUserId
     ) {
+        UUID userId = context.getCurrentUUID();
+
         application.execute(null); //TODO
         return "Steam id " + steamUserId + " linked";
     }

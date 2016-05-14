@@ -2,6 +2,7 @@ package axon.ui.commands;
 
 import axon.core.Application;
 import axon.core.user.command.BuyGameCommand;
+import axon.core.user.command.LinkSteamAccountCommand;
 import axon.core.user.command.RegisterUserCommand;
 import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.user.exception.GameAlreadyBoughtException;
@@ -56,7 +57,9 @@ public class UserCommands implements CommandMarker {
         @CliOption(key = "", mandatory = true)
         String steamUserId
     ) {
-        application.execute(null); //TODO
+        UUID userId = context.getCurrentUUID();
+
+        application.execute(new LinkSteamAccountCommand(userId, steamUserId));
         return "Steam id " + steamUserId + " linked";
     }
 

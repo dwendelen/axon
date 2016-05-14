@@ -1,10 +1,12 @@
 package axon.core.user;
 
 import axon.core.user.command.BuyGameCommand;
+import axon.core.user.command.LinkSteamAccountCommand;
 import axon.core.user.command.RegisterUserCommand;
 import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.user.event.EmailAddressUpdatedEvent;
 import axon.core.user.event.GameBoughtEvent;
+import axon.core.user.event.SteamAccountLinkedEvent;
 import axon.core.user.event.UserRegisteredEvent;
 import axon.core.user.exception.GameAlreadyBoughtException;
 import org.axonframework.commandhandling.annotation.CommandHandler;
@@ -25,6 +27,7 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     private String emailAddress;
 
     private Set<UUID> boughtGames = new HashSet<>();
+    private String steamId;
 
     public User() {}
 
@@ -52,6 +55,14 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
 
     public String getEmailAddress() {
         return emailAddress;
+    }
+
+    public Set<UUID> getBoughtGames() {
+        return new HashSet<>(boughtGames);
+    }
+
+    public String getSteamId() {
+        return steamId;
     }
 
     @EventSourcingHandler
@@ -94,5 +105,19 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
     public void handle(GameBoughtEvent gameBoughtEvent) {
         this.boughtGames.add(gameBoughtEvent.getGameId());
     }
-    //TODO
+
+    @CommandHandler
+    public void linkSteamAccount(LinkSteamAccountCommand linkSteamAccountCommand) {
+        SteamAccountLinkedEvent steamAccountLinkedEvent = new SteamAccountLinkedEvent(
+                linkSteamAccountCommand.getUserId(),
+                linkSteamAccountCommand.getSteamId()
+        );
+
+        apply(steamAccountLinkedEvent);
+    }
+
+    @EventSourcingHandler
+    public void handle(SteamAccountLinkedEvent steamAccountLinkedEvent) {
+        this.steamId = steamAccountLinkedEvent.getSteamId();
+    }
 }

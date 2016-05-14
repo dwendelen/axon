@@ -70,5 +70,6 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
         this.emailAddress = emailAddressUpdatedEvent.getNewEmailAddress();
     }
 
-    //TODO
+    //TODO Buy games
+    //TODO Link Steam account
 }
