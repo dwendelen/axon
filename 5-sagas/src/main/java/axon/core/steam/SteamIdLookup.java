@@ -1,4 +1,4 @@
-package axon.core;
+package axon.core.steam;
 
 import org.springframework.stereotype.Component;
 

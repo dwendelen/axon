@@ -1,4 +1,4 @@
-package axon.core;
+package axon.core.steam;
 
 import axon.core.game.event.GameRegisteredEvent;
 import axon.core.user.event.SteamAccountLinkedEvent;

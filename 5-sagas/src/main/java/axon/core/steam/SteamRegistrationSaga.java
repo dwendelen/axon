@@ -1,4 +1,4 @@
-package axon.core;
+package axon.core.steam;
 
 import axon.core.infrastructure.steam.SteamGateway;
 import axon.core.user.event.GameBoughtEvent;

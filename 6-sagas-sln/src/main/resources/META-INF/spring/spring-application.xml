@@ -52,7 +52,7 @@
             saga-repository="sagaRepository">
         <axon:types>
             axon.core.ExampleSaga
-            axon.core.SteamRegistrationSaga
+            axon.core.steam.SteamRegistrationSaga
         </axon:types>
     </axon:saga-manager>
 
