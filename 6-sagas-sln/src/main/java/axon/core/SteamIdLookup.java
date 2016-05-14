@@ -10,4 +10,8 @@ public class SteamIdLookup {
     public Optional<String> getSteamIdForUser(UUID userId) {
         throw new UnsupportedOperationException();
     }
+
+    public Optional<String> getSteamIdForGame(UUID gameId) {
+        throw new UnsupportedOperationException();
+    }
 }

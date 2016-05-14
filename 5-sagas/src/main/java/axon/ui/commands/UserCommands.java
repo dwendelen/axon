@@ -50,6 +50,15 @@ public class UserCommands implements CommandMarker {
         return "Updated email address to " + emailAddress;
     }
 
+    @CliCommand("link-steam")
+    public String linkSteamAccount(
+        @CliOption(key = "", mandatory = true)
+        String steamUserId
+    ) {
+        application.execute(null); //TODO
+        return "Steam id " + steamUserId + " linked";
+    }
+
     @CliCommand("buy-game")
     public String buyGame(
             @CliOption(key = "", mandatory = true)

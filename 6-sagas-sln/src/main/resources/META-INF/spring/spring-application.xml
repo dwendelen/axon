@@ -16,13 +16,22 @@
     <axon:event-bus id="eventBus"/>
     <axon:filesystem-event-store base-dir="events" id="eventStore"/>
     <axon:event-sourcing-repository
-            id="repository"
+            id="userRepository"
             aggregate-type="axon.core.user.User"
             event-bus="eventBus"
             event-store="eventStore"/>
     <axon:aggregate-command-handler
             aggregate-type="axon.core.user.User"
-            repository="repository"
+            repository="userRepository"
+            command-bus="commandBus"/>
+    <axon:event-sourcing-repository
+            id="gameRepository"
+            aggregate-type="axon.core.game.Game"
+            event-bus="eventBus"
+            event-store="eventStore"/>
+    <axon:aggregate-command-handler
+            aggregate-type="axon.core.game.Game"
+            repository="gameRepository"
             command-bus="commandBus"/>
 
     <bean class="org.axonframework.eventhandling.annotation.AnnotationEventListenerBeanPostProcessor">

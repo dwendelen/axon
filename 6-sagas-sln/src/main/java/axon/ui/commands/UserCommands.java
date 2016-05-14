@@ -1,6 +1,7 @@
 package axon.ui.commands;
 
 import axon.core.Application;
+import axon.core.user.command.BuyGameCommand;
 import axon.core.user.command.RegisterUserCommand;
 import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.user.exception.GameAlreadyBoughtException;
@@ -50,6 +51,15 @@ public class UserCommands implements CommandMarker {
         return "Updated email address to " + emailAddress;
     }
 
+    @CliCommand("link-steam")
+    public String linkSteamAccount(
+        @CliOption(key = "", mandatory = true)
+        String steamUserId
+    ) {
+        application.execute(null); //TODO
+        return "Steam id " + steamUserId + " linked";
+    }
+
     @CliCommand("buy-game")
     public String buyGame(
             @CliOption(key = "", mandatory = true)
@@ -61,7 +71,7 @@ public class UserCommands implements CommandMarker {
         UUID userId = context.getCurrentUUID();
 
         try {
-            application.execute(null); //TODO
+            application.execute(new BuyGameCommand(userId, gameId));
             return "You bought " + gameName;
         } catch (GameAlreadyBoughtException e) {
             return "Could not buy " + gameName + " because you already bought it";

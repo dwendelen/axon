@@ -13,7 +13,7 @@ public class VirtualSteamServer implements SteamGateway {
 
     @Override
     public void registerGame(String steamUserId, String steamGameId) {
-        String extraLine = StringUtils.padRight(steamUserId, 10) + steamGameId + "\n";
+        String extraLine = StringUtils.padRight(steamUserId, 16) + steamGameId + "\n";
         logsToPrint += extraLine;
     }
 

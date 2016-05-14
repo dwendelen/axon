@@ -1,15 +1,20 @@
 package axon.core.user;
 
+import axon.core.user.command.BuyGameCommand;
 import axon.core.user.command.RegisterUserCommand;
 import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.user.event.EmailAddressUpdatedEvent;
+import axon.core.user.event.GameBoughtEvent;
 import axon.core.user.event.UserRegisteredEvent;
+import axon.core.user.exception.GameAlreadyBoughtException;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.common.Assert;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class User extends AbstractAnnotatedAggregateRoot<UUID> {
@@ -18,6 +23,8 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
 
     private String name;
     private String emailAddress;
+
+    private Set<UUID> boughtGames = new HashSet<>();
 
     public User() {}
 
@@ -70,5 +77,22 @@ public class User extends AbstractAnnotatedAggregateRoot<UUID> {
         this.emailAddress = emailAddressUpdatedEvent.getNewEmailAddress();
     }
 
+    @CommandHandler
+    public void buyGame(BuyGameCommand buyGameCommand) {
+        if(boughtGames.contains(buyGameCommand.getGameId())) {
+            throw new GameAlreadyBoughtException();
+        }
+
+        GameBoughtEvent gameBoughtEvent = new GameBoughtEvent(
+                buyGameCommand.getUserId(),
+                buyGameCommand.getGameId(),
+                buyGameCommand.getPurchaseId());
+        apply(gameBoughtEvent);
+    }
+
+    @EventSourcingHandler
+    public void handle(GameBoughtEvent gameBoughtEvent) {
+        this.boughtGames.add(gameBoughtEvent.getGameId());
+    }
     //TODO
 }

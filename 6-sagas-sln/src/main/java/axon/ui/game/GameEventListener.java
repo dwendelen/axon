@@ -12,6 +12,7 @@ public class GameEventListener {
 
     @EventHandler
     public void gameRegistered(GameRegisteredEvent gameRegisteredEvent) {
-        throw new UnsupportedOperationException(); //TODO
+        GameDTO gameDTO = new GameDTO(gameRegisteredEvent.getGameId(), gameRegisteredEvent.getName());
+        gameCatalog.addGame(gameDTO);
     }
 }
