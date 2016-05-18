@@ -12,3 +12,6 @@ register --name <name> --email <email address>
 update-email <new email address>
 buy-game <game name>
 link-steam <id of user in steam>
+
+log on
+log off

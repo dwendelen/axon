@@ -156,4 +156,6 @@ public class UITest {
         assertThat(commandResult.isSuccess()).isTrue();
         assertThat(commandResult.getResult()).isEqualTo("");
     }
+
+    //6 TODO
 }

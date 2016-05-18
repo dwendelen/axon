@@ -1,9 +1,14 @@
 package axon.core.user;
 
+import axon.core.user.command.BuyGameCommand;
+import axon.core.user.command.LinkSteamAccountCommand;
 import axon.core.user.command.RegisterUserCommand;
 import axon.core.user.command.UpdateEmailAddressCommand;
 import axon.core.user.event.EmailAddressUpdatedEvent;
+import axon.core.user.event.GameBoughtEvent;
+import axon.core.user.event.SteamAccountLinkedEvent;
 import axon.core.user.event.UserRegisteredEvent;
+import axon.core.user.exception.GameAlreadyBoughtException;
 import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.Before;
@@ -16,6 +21,8 @@ public class UserTest {
     public static final UUID USER_UUID = UUID.randomUUID();
     public static final String OLD_EMAIL = "old email";
     public static final String NEW_EMAIL = "email";
+    public static final String STEAM_ID = "SteamId";
+    public static final UUID GAME_ID = UUID.randomUUID();
 
     private FixtureConfiguration<User> fixture;
 
@@ -72,4 +79,30 @@ public class UserTest {
     //3 READ MODELS
     //4 SPRING
     //5 SAGAS
+    //6 TODO
+
+    @Test
+    public void givenAUser_whenILinkASteamAccount_thenASteamAccountIsLinked() throws Exception {
+        fixture.given(new UserRegisteredEvent(USER_UUID, NAME, OLD_EMAIL))
+                .when(new LinkSteamAccountCommand(USER_UUID, STEAM_ID))
+                .expectEvents(new SteamAccountLinkedEvent(USER_UUID, STEAM_ID));
+    }
+
+    @Test
+    public void givenAUser_whenIBuyAGame_thenTheGameIsBought() throws Exception {
+        BuyGameCommand buyGameCommand = new BuyGameCommand(USER_UUID, GAME_ID);
+        fixture.given(new UserRegisteredEvent(USER_UUID, NAME, OLD_EMAIL))
+                .when(buyGameCommand)
+                .expectEvents(new GameBoughtEvent(USER_UUID, GAME_ID, buyGameCommand.getPurchaseId()));
+    }
+
+    @Test
+    public void givenAUserThatBoughtAGame_whenIBuyThatGameAgain_thenAnExceptionIsThrown() throws Exception {
+        fixture.given(
+                    new UserRegisteredEvent(USER_UUID, NAME, OLD_EMAIL),
+                    new GameBoughtEvent(USER_UUID, GAME_ID, UUID.randomUUID())
+                )
+                .when(new BuyGameCommand(USER_UUID, GAME_ID))
+                .expectException(GameAlreadyBoughtException.class);
+    }
 }

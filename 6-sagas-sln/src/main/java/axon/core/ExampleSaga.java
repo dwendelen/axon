@@ -1,5 +1,6 @@
 package axon.core;
 
+import axon.core.infrastructure.logger.Logger;
 import axon.core.user.event.EmailAddressUpdatedEvent;
 import axon.core.user.event.UserRegisteredEvent;
 import org.axonframework.eventhandling.scheduling.EventScheduler;
@@ -24,14 +25,24 @@ public class ExampleSaga extends AbstractAnnotatedSaga {
 
     @Autowired
     private transient EventScheduler eventScheduler;
+    @Autowired
+    private transient Logger logger;
 
     private int nbOfChanges = 0;
     private ScheduleToken scheduledTimeout;
 
+    public void setEventScheduler(EventScheduler eventScheduler) {
+        this.eventScheduler = eventScheduler;
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
     @StartSaga
     @SagaEventHandler(associationProperty = "userId")
     public void handle(UserRegisteredEvent userRegisteredEvent) {
-        System.out.println("Saga started");
+        logger.log("Saga started");
 
         UUID timeoutId = scheduleTimeout();
         associateWith("timeoutId", timeoutId.toString());
@@ -41,7 +52,7 @@ public class ExampleSaga extends AbstractAnnotatedSaga {
         ExampleSagaTimeoutEvent exampleSagaTimeoutEvent = new ExampleSagaTimeoutEvent();
         scheduledTimeout = eventScheduler.schedule(Duration.standardSeconds(TIMEOUT_IN_SEC), exampleSagaTimeoutEvent);
 
-        System.out.println("Countdown starting");
+        logger.log("Countdown starting");
         return exampleSagaTimeoutEvent.getTimeoutId();
     }
 
@@ -50,7 +61,7 @@ public class ExampleSaga extends AbstractAnnotatedSaga {
         nbOfChanges++;
         if(nbOfChanges >= 3) {
             eventScheduler.cancelSchedule(scheduledTimeout);
-            System.out.println("You changed your email address 3 times or more");
+            logger.log("You changed your email address 3 times or more");
             end();
         }
     }
@@ -58,8 +69,8 @@ public class ExampleSaga extends AbstractAnnotatedSaga {
     @SagaEventHandler(associationProperty = "timeoutId")
     @EndSaga
     public void handle(ExampleSagaTimeoutEvent timeoutEvent) {
-        System.out.println("You changed your email address " + nbOfChanges + " times");
-        System.out.println("Saga ended");
+        logger.log("You changed your email address " + nbOfChanges + " times");
+        logger.log("Saga ended");
     }
 
     private static class ExampleSagaTimeoutEvent {
