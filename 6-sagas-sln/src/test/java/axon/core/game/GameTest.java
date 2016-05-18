@@ -10,6 +10,7 @@ import org.junit.Test;
 public class GameTest {
     public static final String STEAM_ID = "steam";
     public static final String NAME = "game";
+
     private FixtureConfiguration<Game> fixture;
 
     @Before
@@ -25,7 +26,7 @@ public class GameTest {
     //6 TODO
 
     @Test
-    public void name() throws Exception {
+    public void whenIRegisterAGame_thenAGameIsRegistered() throws Exception {
         RegisterGameCommand registerGameCommand = new RegisterGameCommand(NAME, STEAM_ID);
 
         fixture.given()

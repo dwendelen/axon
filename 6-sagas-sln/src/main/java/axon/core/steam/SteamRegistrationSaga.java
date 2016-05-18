@@ -20,6 +20,14 @@ public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
     private UUID userId;
     private String gameSteamId;
 
+    public void setSteamGateway(SteamGateway steamGateway) {
+        this.steamGateway = steamGateway;
+    }
+
+    public void setSteamIdLookup(SteamIdLookup steamIdLookup) {
+        this.steamIdLookup = steamIdLookup;
+    }
+
     @StartSaga
     @SagaEventHandler(associationProperty = "purchaseId")
     public void handle(GameBoughtEvent gameBoughtEvent) {

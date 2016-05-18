@@ -12,4 +12,6 @@ public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
     public void handle(GameBoughtEvent gameBoughtEvent) {
         throw new UnsupportedOperationException();
     }
+
+    //TODO Implement and Complete
 }

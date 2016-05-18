@@ -99,8 +99,16 @@ Part 3: Linking Steam accounts:
 
 Part 4: Notifying Steam:
 Complete axon.core.SteamRegistrationSaga:
- - There should be one saga instance per game purchase, generate unique
-    id's for every purchase
+ - There should be one saga instance per game purchase
  - Do not forget to add the saga in 'spring-application.xml'
  - Make sure that the saga ends when Steam is notified
  - Use the SteamIdLookup to find the SteamId
+
+Do not forget that it is allowed to write tests.
+All tests should run green at the end of this exercise.
+
+Hints:
+ - http://www.axonframework.org/docs/2.4/sagas.html
+ - To ensure that for every purchase a unique saga exists, you can generate a
+    UUID for every purchase and associate the saga with that UUID.
+    There might exist other ways to achieve this goal though.
