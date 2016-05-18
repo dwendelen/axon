@@ -93,12 +93,13 @@ Also implement the following controller method:
 
 Part 3: Linking Steam accounts:
  - Create commands and events the link a Steam account to a user
- - Implement axon.core.SteamIdLookup. Create event listeners to populate
-    SteamIdLookup. You can also implement the listeners in SteamIdLookup.
  - Implement axon.ui.commands.UserCommands.linkSteamAccount()
 
 Part 4: Notifying Steam:
-Complete axon.core.SteamRegistrationSaga:
+Implement axon.core.steam.SteamIdLookup:
+  - Create event listeners to populate SteamIdLookup
+  - You can also implement the listeners in SteamIdLookup
+Complete axon.core.steam.SteamRegistrationSaga:
  - There should be one saga instance per game purchase
  - Do not forget to add the saga in 'spring-application.xml'
  - Make sure that the saga ends when Steam is notified
