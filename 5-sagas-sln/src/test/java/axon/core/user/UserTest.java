@@ -79,7 +79,6 @@ public class UserTest {
     //3 READ MODELS
     //4 SPRING
     //5 SAGAS
-    //6 TODO
 
     @Test
     public void givenAUser_whenILinkASteamAccount_thenASteamAccountIsLinked() throws Exception {

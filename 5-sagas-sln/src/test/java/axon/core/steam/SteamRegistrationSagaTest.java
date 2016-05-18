@@ -62,6 +62,4 @@ public class SteamRegistrationSagaTest {
 
         steamGatewayMock.assertRegistered(USER_STEAM_ID, GAME_STEAM_ID);
     }
-
-    //6 TODO
 }
