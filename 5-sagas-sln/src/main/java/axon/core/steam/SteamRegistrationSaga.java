@@ -31,12 +31,12 @@ public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
     @StartSaga
     @SagaEventHandler(associationProperty = "purchaseId")
     public void handle(GameBoughtEvent gameBoughtEvent) {
-        this.gameSteamId = steamIdLookup.getSteamIdForGame(gameBoughtEvent.getGameId());
+        this.gameSteamId = steamIdLookup.getSteamGameIdForGame(gameBoughtEvent.getGameId());
         this.userId = gameBoughtEvent.getUserId();
 
         associateWith("userId", this.userId.toString());
 
-        Optional<String> steamIdForUser = steamIdLookup.getSteamIdForUser(gameBoughtEvent.getUserId());
+        Optional<String> steamIdForUser = steamIdLookup.getSteamAccountIdForUser(gameBoughtEvent.getUserId());
         if(!steamIdForUser.isPresent()) {
             return;
         }

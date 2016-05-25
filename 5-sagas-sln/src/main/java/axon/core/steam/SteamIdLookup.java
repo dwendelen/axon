@@ -15,11 +15,11 @@ public class SteamIdLookup {
     private Map<UUID, String> users = new HashMap<>();
     private Map<UUID, String> games = new HashMap<>();
 
-    public Optional<String> getSteamIdForUser(UUID userId) {
+    public Optional<String> getSteamAccountIdForUser(UUID userId) {
         return Optional.ofNullable(users.get(userId));
     }
 
-    public String getSteamIdForGame(UUID gameId) {
+    public String getSteamGameIdForGame(UUID gameId) {
         return games.get(gameId);
     }
 

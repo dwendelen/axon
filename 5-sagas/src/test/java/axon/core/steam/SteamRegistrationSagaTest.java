@@ -70,7 +70,7 @@ public class SteamRegistrationSagaTest {
             userRegistered = true;
         }
 
-        public Optional<String> getSteamIdForUser(UUID userId) {
+        public Optional<String> getSteamAccountIdForUser(UUID userId) {
             if(userRegistered) {
                 return Optional.of(USER_STEAM_ID);
             } else {
@@ -78,7 +78,7 @@ public class SteamRegistrationSagaTest {
             }
         }
 
-        public String getSteamIdForGame(UUID gameId) {
+        public String getSteamGameIdForGame(UUID gameId) {
             return GAME_STEAM_ID;
         }
     }
