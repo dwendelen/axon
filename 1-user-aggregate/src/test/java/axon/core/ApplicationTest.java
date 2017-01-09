@@ -1,7 +1,5 @@
 package axon.core;
 
-import axon.core.Application;
-import axon.core.User;
 import axon.core.command.RegisterUserCommand;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +29,7 @@ public class ApplicationTest {
         application.execute(command);
         User user = application.getUser(uuid);
         assertThat(user.getName()).isEqualTo(NAME);
-        assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
+        assertThat(user.getEmailAddress()).isEqualTo(OLD_EMAIL_ADDRESS);
     }
 
     @Test

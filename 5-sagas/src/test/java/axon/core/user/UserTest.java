@@ -27,9 +27,9 @@ public class UserTest {
     //1 USER AGGREGATE
     @Test
     public void whenIRegisterAUser_thenAUserIsRegistered() throws Exception {
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, NEW_EMAIL);
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, OLD_EMAIL);
 
-        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(registerUserCommand.getUserId(), NAME, NEW_EMAIL);
+        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(registerUserCommand.getUserId(), NAME, OLD_EMAIL);
 
         fixture.given()
                 .when(registerUserCommand)
@@ -38,7 +38,7 @@ public class UserTest {
 
     @Test
     public void whenIRegisterAUserWithoutName_thenAnExceptionIsThrown() throws Exception {
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand("", NEW_EMAIL);
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand("", OLD_EMAIL);
 
         fixture.given()
                 .when(registerUserCommand)

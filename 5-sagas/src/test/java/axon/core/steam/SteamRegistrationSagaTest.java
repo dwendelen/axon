@@ -6,7 +6,6 @@ import org.axonframework.test.saga.AnnotatedSagaTestFixture;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public class SteamRegistrationSagaTest {
@@ -20,13 +19,13 @@ public class SteamRegistrationSagaTest {
     private AnnotatedSagaTestFixture fixture;
 
     private SteamGatewayMock steamGatewayMock = new SteamGatewayMock();
-    private SteamIdLookupStub steamIdLookupStub = new SteamIdLookupStub();
+    private SteamIdLookup steamIdLookup = new SteamIdLookup();
 
     @Before
     public void setUp() {
         fixture = new AnnotatedSagaTestFixture(SteamRegistrationSaga.class);
         fixture.registerResource(steamGatewayMock);
-        fixture.registerResource(steamIdLookupStub);
+        fixture.registerResource(steamIdLookup);
     }
 
     //1 USER AGGREGATE
@@ -54,32 +53,9 @@ public class SteamRegistrationSagaTest {
 
     @Test
     public void givenAUserWithSteamId_whenTheUserBuysAGame_thenSteamIsNotified() throws Exception {
-        steamIdLookupStub.registerUser();
         fixture.whenPublishingA(new GameBoughtEvent(/* TODO */))
                 .expectActiveSagas(0);
 
         steamGatewayMock.assertRegistered(USER_STEAM_ID, GAME_STEAM_ID);
-    }
-
-    //6 TODO
-
-    private static class SteamIdLookupStub extends SteamIdLookup {
-        private boolean userRegistered = false;
-
-        public void registerUser() {
-            userRegistered = true;
-        }
-
-        public Optional<String> getSteamAccountIdForUser(UUID userId) {
-            if(userRegistered) {
-                return Optional.of(USER_STEAM_ID);
-            } else {
-                return Optional.empty();
-            }
-        }
-
-        public String getSteamGameIdForGame(UUID gameId) {
-            return GAME_STEAM_ID;
-        }
     }
 }

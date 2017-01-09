@@ -12,18 +12,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
-    @Autowired
     private transient SteamGateway steamGateway;
-    @Autowired
     private transient SteamIdLookup steamIdLookup;
 
     private UUID userId;
     private String gameSteamId;
 
+    @Autowired
     public void setSteamGateway(SteamGateway steamGateway) {
         this.steamGateway = steamGateway;
     }
 
+    @Autowired
     public void setSteamIdLookup(SteamIdLookup steamIdLookup) {
         this.steamIdLookup = steamIdLookup;
     }

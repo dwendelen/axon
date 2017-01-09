@@ -54,6 +54,7 @@ public class SteamRegistrationSagaTest {
 
         steamGatewayMock.assertRegistered(USER_STEAM_ID, GAME_STEAM_ID);
     }
+
     @Test
     public void givenAUserWithSteamId_whenTheUserBuysAGame_thenSteamIsNotified() throws Exception {
         steamIdLookup.handle(new SteamAccountLinkedEvent(USER_ID, USER_STEAM_ID));

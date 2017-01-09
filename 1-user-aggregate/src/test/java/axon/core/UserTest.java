@@ -1,6 +1,5 @@
 package axon.core;
 
-import axon.core.User;
 import axon.core.command.RegisterUserCommand;
 import axon.core.event.UserRegisteredEvent;
 import org.axonframework.test.FixtureConfiguration;
@@ -39,6 +38,7 @@ public class UserTest {
 
         fixture.given()
                 .when(registerUserCommand)
+                .expectEvents()
                 .expectException(IllegalArgumentException.class);
     }
 

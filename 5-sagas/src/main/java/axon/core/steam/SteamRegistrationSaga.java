@@ -6,8 +6,12 @@ import org.axonframework.saga.annotation.AbstractAnnotatedSaga;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SteamRegistrationSaga extends AbstractAnnotatedSaga {
-    @Autowired
     private transient SteamGateway steamGateway;
+
+    @Autowired
+    public void setSteamGateway(SteamGateway steamGateway) {
+        this.steamGateway = steamGateway;
+    }
 
     public void handle(GameBoughtEvent gameBoughtEvent) {
         throw new UnsupportedOperationException();

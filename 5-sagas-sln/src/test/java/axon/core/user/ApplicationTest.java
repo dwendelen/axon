@@ -29,13 +29,13 @@ public class ApplicationTest {
     @Test
     @Ignore
     public void iCanRegisterAUsersWithANameAndAnEmailAddress() throws Exception {
-//        RegisterUserCommand command = new RegisterUserCommand(NAME, NEW_EMAIL_ADDRESS);
+//        RegisterUserCommand command = new RegisterUserCommand(NAME, OLD_EMAIL_ADDRESS);
 //        UUID uuid = command.getUuid();
 //
 //        application.execute(command);
 //        User user = application.getUser(uuid);
 //        assertThat(user.getName()).isEqualTo(NAME);
-//        assertThat(user.getEmailAddress()).isEqualTo(NEW_EMAIL_ADDRESS);
+//        assertThat(user.getEmailAddress()).isEqualTo(OLD_EMAIL_ADDRESS);
     }
 
     @Test

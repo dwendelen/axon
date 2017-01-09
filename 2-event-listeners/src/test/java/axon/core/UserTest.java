@@ -1,6 +1,5 @@
 package axon.core;
 
-import axon.core.User;
 import axon.core.command.RegisterUserCommand;
 import axon.core.command.UpdateEmailAddressCommand;
 import axon.core.event.EmailAddressUpdatedEvent;
@@ -28,9 +27,9 @@ public class UserTest {
     //1 USER AGGREGATE
     @Test
     public void whenIRegisterAUser_thenAUserIsRegistered() throws Exception {
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, NEW_EMAIL);
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand(NAME, OLD_EMAIL);
 
-        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(registerUserCommand.getUuid(), NAME, NEW_EMAIL);
+        UserRegisteredEvent userRegisteredEvent = new UserRegisteredEvent(registerUserCommand.getUuid(), NAME, OLD_EMAIL);
 
         fixture.given()
                 .when(registerUserCommand)
@@ -39,7 +38,7 @@ public class UserTest {
 
     @Test
     public void whenIRegisterAUserWithoutName_thenAnExceptionIsThrown() throws Exception {
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand("", NEW_EMAIL);
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand("", OLD_EMAIL);
 
         fixture.given()
                 .when(registerUserCommand)
